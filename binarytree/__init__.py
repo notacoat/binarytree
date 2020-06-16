@@ -403,6 +403,9 @@ class Node(object):
         self.value = self.val = value
         self.left = left
         self.right = right
+       
+    def __eq__(self, other):
+        return (other is not None and self.val == other.val and self.left == other.left and self.right == other.right)
 
     def __repr__(self):
         """Return the string representation of the current node.
