@@ -403,9 +403,10 @@ class Node(object):
         self.value = self.val = value
         self.left = left
         self.right = right
-       
+
     def __eq__(self, other):
-        return (other is not None and self.val == other.val and self.left == other.left and self.right == other.right)
+        """checks self.val's equality with other.val"""
+        return (other is not None and self.val == other.val)
 
     def __repr__(self):
         """Return the string representation of the current node.
@@ -782,6 +783,10 @@ class Node(object):
                 'no node to delete at index {}'.format(index))
 
         setattr(parent, child_attr, None)
+
+    def deep_equals(self, other):
+        """ checks equality among node and children"""
+        return (other is not None and self.val == other.val and self.left.deep_equals(other.left) and self.right.deep_equals(other.right))
 
     def pprint(self, index=False, delimiter='-'):
         """Pretty-print the binary tree.
