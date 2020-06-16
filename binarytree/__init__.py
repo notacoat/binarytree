@@ -786,7 +786,27 @@ class Node(object):
 
     def deep_equals(self, other):
         """ checks equality among node and children"""
-        return (other is not None and self.val == other.val and self.left.deep_equals(other.left) and self.right.deep_equals(other.right))
+        if not(self and other):
+            return self == other
+        if self.val == other.val:
+            if self.left or self.right or other.left or other.right:
+                match = True
+            else:
+                return True
+
+        if self.left:
+            left = self.left.deep_equals(other.left)
+        elif other.left:
+            return False
+        else:
+            left = True
+        if self.right:
+            right = self.right.deep_equals(other.right)
+        elif other.right:
+            return False
+        else:
+            right = True
+        return match and left == right
 
     def pprint(self, index=False, delimiter='-'):
         """Pretty-print the binary tree.
